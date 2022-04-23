@@ -4,7 +4,7 @@ using System.Drawing;
 
 #region Static variables
 string subDir;
-    int i = 0;
+int i = 0;
 #endregion
 
 subDir = DateTime.Now.ToString("dd-MMM-yyyy");
@@ -12,13 +12,12 @@ if (!Directory.Exists(subDir))
 {
     Directory.CreateDirectory(subDir);
 }
-
 SetInterval(TimeSpan.FromSeconds(5)).ConfigureAwait(false);
-
 Thread.Sleep(TimeSpan.FromMinutes(240));
 
-
-
+/// <summary>
+/// USed to Save the ScreenSHot
+/// </summary>
 void SaveScreenShot()
 {
     try
@@ -41,10 +40,13 @@ void SaveScreenShot()
     }
 }
 
+
+/// <summary>
+/// Similar to Windows SetTimeOut Function
+/// </summary>
 async Task SetInterval(TimeSpan timeout)
 {
     await Task.Delay(timeout).ConfigureAwait(false);
     SaveScreenShot();
     await SetInterval(timeout).ConfigureAwait(false); ;
 }
-
